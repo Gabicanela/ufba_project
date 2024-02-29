@@ -93,6 +93,16 @@ class _MyHomePageState extends State<MyHomePage> {
                         borderRadius: BorderRadius.circular(20))),
                 keyboardType: TextInputType.number,
               ),
+              const SizedBox(height: 40),
+              ElevatedButton(
+                  onPressed: () {
+                    print("Clicado");
+                  },
+                  child: const Text("Calcular",
+                      style: TextStyle(
+                          fontSize: 20,
+                          color: Colors.blueAccent,
+                          fontWeight: FontWeight.bold)))
             ],
           ),
         ),
