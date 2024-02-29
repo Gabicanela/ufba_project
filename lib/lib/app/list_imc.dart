@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:projeto_ufba/database/script.dart';
 
 class ListImc extends StatelessWidget {
-  const ListImc({super.key});
+  const ListImc({Key? key});
 
   @override
   Widget build(BuildContext context) {
@@ -10,9 +10,14 @@ class ListImc extends StatelessWidget {
       appBar: AppBar(
         centerTitle: true,
         backgroundColor: Colors.blueAccent,
-        title: const Text('Histórico de IMC', style: TextStyle(color: Colors.white,
+        title: const Text(
+          'Histórico de IMC',
+          style: TextStyle(
+            color: Colors.white,
             fontSize: 24,
-            fontWeight: FontWeight.bold,),),
+            fontWeight: FontWeight.bold,
+          ),
+        ),
         actions: [
           IconButton(
             onPressed: () {},
@@ -39,7 +44,7 @@ class ListImc extends StatelessWidget {
                 final imc = imcs[index];
                 return ListTile(
                   title: Text('Nome: ${imc.nome}'),
-                  subtitle: Text('Altura: ${imc.altura}, Peso: ${imc.peso}, IMC: ${imc.imc}'),
+                  subtitle: Text('Altura: ${imc.altura.toStringAsFixed(2)}, Peso: ${imc.peso.toStringAsFixed(2)}, IMC: ${imc.imc.toStringAsFixed(2)}'),
                 );
               },
             );

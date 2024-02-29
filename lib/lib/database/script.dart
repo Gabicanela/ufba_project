@@ -29,7 +29,7 @@ class DatabaseHelper {
       join(await getDatabasesPath(), 'imc_database.db'),
       onCreate: (db, version) {
         return db.execute(
-          'CREATE TABLE imc(id INTEGER PRIMARY KEY AUTOINCREMENT, nome TEXT, altura REAL, peso REAL, imc REAL)',
+          'CREATE TABLE imc(id INTEGER PRIMARY KEY AUTOINCREMENT, nome TEXT, altura INTEGER, peso REAL, imc REAL)',
         );
       },
       version: 1,
