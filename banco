@@ -1,0 +1,4 @@
+- Adicionei página de lista de imc
+- Acrescentei a lógica para gerar o cálculo do imc(verificar no emulador)
+- Adicionei o botão que rediciona para a página do histórico de imc's
+- Criei o arquivo de conexão com o banco(falta testar) 
