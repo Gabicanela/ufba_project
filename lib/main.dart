@@ -45,13 +45,11 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        backgroundColor: Colors.blueAccent,
         title: Text(
           widget.title,
           style: const TextStyle(
-              color: Colors.blueAccent,
-              fontSize: 24,
-              fontWeight: FontWeight.bold),
+              color: Colors.white, fontSize: 24, fontWeight: FontWeight.bold),
         ),
       ),
       body: Center(
@@ -95,13 +93,15 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
               const SizedBox(height: 40),
               ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.blueAccent),
                   onPressed: () {
                     print("Clicado");
                   },
                   child: const Text("Calcular",
                       style: TextStyle(
                           fontSize: 20,
-                          color: Colors.blueAccent,
+                          color: Colors.white,
                           fontWeight: FontWeight.bold)))
             ],
           ),
