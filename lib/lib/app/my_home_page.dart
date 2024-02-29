@@ -88,7 +88,7 @@ class MyHomePage extends StatelessWidget {
                     // Criar uma instância do modelo IMC
                     IMC novoImc = IMC(
                       nome: nomeController.text,
-                      altura: altura.toDouble(), // Converter para inteiro
+                      altura: altura.toDouble(), 
                       peso: peso,
                       imc: imc,
                     );
