@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:projeto_ufba/database/script.dart';
 
 class ListImc extends StatelessWidget {
-  const ListImc({Key? key});
+  const ListImc({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -42,9 +42,12 @@ class ListImc extends StatelessWidget {
               itemCount: imcs.length,
               itemBuilder: (context, index) {
                 final imc = imcs[index];
-                return ListTile(
-                  title: Text('Nome: ${imc.nome}'),
-                  subtitle: Text('Altura: ${imc.altura.toStringAsFixed(2)}, Peso: ${imc.peso.toStringAsFixed(2)}, IMC: ${imc.imc.toStringAsFixed(2)}'),
+                return Card(
+                  child: ListTile(
+                    title: Text('Nome: ${imc.nome}'),
+                    subtitle: Text(
+                        'Altura: ${imc.altura.toStringAsFixed(2)}, Peso: ${imc.peso.toStringAsFixed(2)}, IMC: ${imc.imc.toStringAsFixed(2)}'),
+                  ),
                 );
               },
             );

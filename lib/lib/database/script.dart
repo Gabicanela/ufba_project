@@ -1,7 +1,6 @@
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 
-// Modelo para representar os dados do IMC
 class IMC {
   final int? id;
   final String nome;
@@ -22,14 +21,13 @@ class IMC {
   }
 }
 
-// Classe helper para interagir com o banco de dados SQLite
 class DatabaseHelper {
   static Future<Database> database() async {
     final database = openDatabase(
       join(await getDatabasesPath(), 'imc_database.db'),
       onCreate: (db, version) {
         return db.execute(
-          'CREATE TABLE imc(id INTEGER PRIMARY KEY AUTOINCREMENT, nome TEXT, altura INTEGER, peso REAL, imc REAL)',
+          'CREATE TABLE imc(id INTEGER PRIMARY KEY AUTOINCREMENT, nome TEXT, altura REAL, peso REAL, imc REAL)',
         );
       },
       version: 1,
