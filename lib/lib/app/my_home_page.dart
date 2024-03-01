@@ -4,7 +4,7 @@ import 'package:projeto_ufba/app/list_imc.dart';
 import 'package:projeto_ufba/database/script.dart';
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
+  const MyHomePage({super.key, required this.title});
 
   final String title;
 
@@ -75,8 +75,11 @@ class _MyHomePageState extends State<MyHomePage> {
                   FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d{0,2}')),
                 ],
                 validator: (value) {
-                  if (value != null && double.tryParse(value)! > 2.5) {
-                    return 'Insira um valor válido para altura (máx. 2.5 metros)';
+                  if (value != null) {
+                    double altura = double.tryParse(value)!;
+                    if (altura < 0.5 || altura > 2.5) {
+                      return 'Insira um valor válido para altura (entre 0.5 e 2.5 m)';
+                    }
                   }
                   return null;
                 },
@@ -92,8 +95,11 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
                 keyboardType: TextInputType.number,
                 validator: (value) {
-                  if (value != null && double.tryParse(value)! > 500) {
-                    return 'Insira um valor válido para peso (máx. 500 kg)';
+                  if (value != null) {
+                    double peso = double.tryParse(value)!;
+                    if (peso < 10 || peso > 500) {
+                      return 'Insira um valor válido para peso (entre 10 e 500 kg)';
+                    }
                   }
                   return null;
                 },
@@ -108,6 +114,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     double altura = double.parse(alturaController.text);
                     double peso = double.parse(pesoController.text);
                     double imc = peso / (altura * altura);
+                    String imcInterpretation = interpretarIMC(imc);
 
                     IMC novoImc = IMC(
                       nome: nomeController.text,
@@ -124,7 +131,15 @@ class _MyHomePageState extends State<MyHomePage> {
                       builder: (BuildContext context) {
                         return AlertDialog(
                           title: const Text('Seu IMC é:'),
-                          content: Text(imc.toStringAsFixed(2)),
+                          content: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(imc.toStringAsFixed(2)),
+                              const SizedBox(height: 10),
+                              Text(imcInterpretation),
+                            ],
+                          ),
                           actions: [
                             TextButton(
                               onPressed: () {
@@ -168,5 +183,21 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
     );
+  }
+
+  String interpretarIMC(double imc) {
+    if (imc < 18.5) {
+      return 'Abaixo do peso';
+    } else if (imc >= 18.5 && imc < 24.9) {
+      return 'Peso normal';
+    } else if (imc >= 24.9 && imc < 29.9) {
+      return 'Sobrepeso';
+    } else if (imc >= 29.9 && imc < 34.9) {
+      return 'Obesidade grau I';
+    } else if (imc >= 34.9 && imc < 39.9) {
+      return 'Obesidade grau II';
+    } else {
+      return 'Obesidade grau III';
+    }
   }
 }
