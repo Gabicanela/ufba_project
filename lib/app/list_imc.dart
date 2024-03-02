@@ -1,8 +1,25 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart'
+    show
+        AppBar,
+        BuildContext,
+        Card,
+        Center,
+        CircularProgressIndicator,
+        Colors,
+        ConnectionState,
+        FontWeight,
+        FutureBuilder,
+        ListTile,
+        ListView,
+        Scaffold,
+        StatelessWidget,
+        Text,
+        TextStyle,
+        Widget;
 import 'package:projeto_ufba/database/script.dart';
 
 class ListImc extends StatelessWidget {
-  const ListImc({Key? key}) : super(key: key);
+  const ListImc({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -18,12 +35,12 @@ class ListImc extends StatelessWidget {
             fontWeight: FontWeight.bold,
           ),
         ),
-        actions: [
-          IconButton(
-            onPressed: () {},
-            icon: const Icon(Icons.edit),
-          )
-        ],
+        // actions: [
+        //   IconButton(
+        //     onPressed: () {},
+        //     icon: const Icon(Icons.edit),
+        //   )
+        // ],
       ),
       body: FutureBuilder<List<IMC>>(
         future: DatabaseHelper.getAllIMCs(),
@@ -46,7 +63,7 @@ class ListImc extends StatelessWidget {
                   child: ListTile(
                     title: Text('Nome: ${imc.nome}'),
                     subtitle: Text(
-                        'Altura: ${imc.altura.toStringAsFixed(2)}, Peso: ${imc.peso.toStringAsFixed(2)}, IMC: ${imc.imc.toStringAsFixed(2)}'),
+                        'Altura: ${imc.altura.toStringAsFixed(2)}, Peso: ${imc.peso.toStringAsFixed(2)}, IMC: ${imc.imc.toStringAsFixed(2)}, Data: ${imc.data}'),
                   ),
                 );
               },

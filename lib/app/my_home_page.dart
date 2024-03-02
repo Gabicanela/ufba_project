@@ -18,6 +18,7 @@ class _MyHomePageState extends State<MyHomePage> {
   TextEditingController nomeController = TextEditingController();
   TextEditingController alturaController = TextEditingController();
   TextEditingController pesoController = TextEditingController();
+  DateTime dateController = DateTime.now();
 
   @override
   Widget build(BuildContext context) {
@@ -70,7 +71,8 @@ class _MyHomePageState extends State<MyHomePage> {
                     borderRadius: BorderRadius.circular(20),
                   ),
                 ),
-                keyboardType: const TextInputType.numberWithOptions(decimal: true),
+                keyboardType:
+                    const TextInputType.numberWithOptions(decimal: true),
                 inputFormatters: [
                   FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d{0,2}')),
                 ],
@@ -117,11 +119,11 @@ class _MyHomePageState extends State<MyHomePage> {
                     String imcInterpretation = interpretarIMC(imc);
 
                     IMC novoImc = IMC(
-                      nome: nomeController.text,
-                      altura: altura,
-                      peso: peso,
-                      imc: imc,
-                    );
+                        nome: nomeController.text,
+                        altura: altura,
+                        peso: peso,
+                        imc: imc,
+                        data: dateController.toString().substring(0, 10));
 
                     await DatabaseHelper.insertIMC(novoImc);
 
@@ -167,8 +169,10 @@ class _MyHomePageState extends State<MyHomePage> {
                   backgroundColor: Colors.blueAccent,
                 ),
                 onPressed: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: ((context) => const ListImc())));
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: ((context) => const ListImc())));
                 },
                 child: const Text(
                   "Histórico",
