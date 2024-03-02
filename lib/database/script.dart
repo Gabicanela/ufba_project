@@ -1,4 +1,3 @@
-// ignore: depend_on_referenced_packages
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 
@@ -8,13 +7,15 @@ class IMC {
   final double altura;
   final double peso;
   final double imc;
+  final String data;
 
   IMC(
       {this.id,
       required this.nome,
       required this.altura,
       required this.peso,
-      required this.imc});
+      required this.imc,
+      required this.data});
 
   Map<String, dynamic> toMap() {
     return {
@@ -23,6 +24,7 @@ class IMC {
       'altura': altura,
       'peso': peso,
       'imc': imc,
+      'data': data
     };
   }
 }
@@ -30,10 +32,10 @@ class IMC {
 class DatabaseHelper {
   static Future<Database> database() async {
     final database = openDatabase(
-      join(await getDatabasesPath(), 'imc_database.db'),
+      join(await getDatabasesPath(), 'imc_database_new.db'),
       onCreate: (db, version) {
         return db.execute(
-          'CREATE TABLE imc(id INTEGER PRIMARY KEY AUTOINCREMENT, nome TEXT, altura REAL, peso REAL, imc REAL)',
+          'CREATE TABLE imc(id INTEGER PRIMARY KEY AUTOINCREMENT, nome TEXT, altura REAL, peso REAL, imc REAL, data TEXT)',
         );
       },
       version: 1,
@@ -55,12 +57,12 @@ class DatabaseHelper {
     final List<Map<String, dynamic>> maps = await db.query('imc');
     return List.generate(maps.length, (i) {
       return IMC(
-        id: maps[i]['id'],
-        nome: maps[i]['nome'],
-        altura: maps[i]['altura'],
-        peso: maps[i]['peso'],
-        imc: maps[i]['imc'],
-      );
+          id: maps[i]['id'],
+          nome: maps[i]['nome'],
+          altura: maps[i]['altura'],
+          peso: maps[i]['peso'],
+          imc: maps[i]['imc'],
+          data: maps[i]['data']);
     });
   }
 }
