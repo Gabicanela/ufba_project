@@ -18,6 +18,7 @@ class _MyHomePageState extends State<MyHomePage> {
   TextEditingController nomeController = TextEditingController();
   TextEditingController alturaController = TextEditingController();
   TextEditingController pesoController = TextEditingController();
+  DateTime dateController = DateTime.now();
 
   @override
   Widget build(BuildContext context) {
@@ -118,11 +119,11 @@ class _MyHomePageState extends State<MyHomePage> {
                     String imcInterpretation = interpretarIMC(imc);
 
                     IMC novoImc = IMC(
-                      nome: nomeController.text,
-                      altura: altura,
-                      peso: peso,
-                      imc: imc,
-                    );
+                        nome: nomeController.text,
+                        altura: altura,
+                        peso: peso,
+                        imc: imc,
+                        data: dateController.toString().substring(0, 10));
 
                     await DatabaseHelper.insertIMC(novoImc);
 
